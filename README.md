@@ -1,4 +1,4 @@
-# 🔐 LoginJAVA+FRONT
+# LoginJAVA+FRONT
 
 Projeto de autenticação desenvolvido com **React + TypeScript** no frontend e **Java** no backend.
 
@@ -6,7 +6,7 @@ O objetivo do projeto é desenvolver uma aplicação de login com uma interface 
 
 ---
 
-## 🚀 Sobre o projeto
+## Sobre o projeto
 
 O **LoginJAVA+FRONT** foi desenvolvido como um projeto de estudo e prática em desenvolvimento de aplicações web, trabalhando conceitos de **Frontend, TypeScript, React e integração com Backend em Java**.
 
@@ -24,7 +24,7 @@ A aplicação possui uma tela de login com:
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 
 ### Frontend
 
@@ -41,7 +41,7 @@ A aplicação possui uma tela de login com:
 
 ---
 
-## 📂 Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 LoginJAVA+FRONT/
@@ -66,7 +66,7 @@ A estrutura pode receber novos módulos conforme o desenvolvimento do projeto av
 
 ---
 
-## 🔑 Tela de Login
+## Tela de Login
 
 A tela principal do projeto está localizada em:
 
@@ -80,7 +80,7 @@ Também utiliza o `Link` do `react-router-dom` para realizar a navegação entre
 
 ---
 
-## 📧 Lembrar e-mail
+## Lembrar e-mail
 
 A aplicação possui uma opção para lembrar o e-mail informado pelo usuário.
 
@@ -100,7 +100,7 @@ Dessa forma, o e-mail pode ser recuperado posteriormente sem precisar ser digita
 
 ---
 
-## 👁️ Mostrar e ocultar senha
+## Mostrar e ocultar senha
 
 O campo de senha possui uma funcionalidade para alternar entre senha visível e senha oculta.
 
@@ -108,7 +108,7 @@ Essa funcionalidade melhora a experiência do usuário durante o preenchimento d
 
 ---
 
-## 🧭 Navegação
+## Navegação
 
 A tela de login possui navegação para outras áreas da aplicação:
 
@@ -126,15 +126,9 @@ Utilizada para acessar a recuperação de senha.
 
 ---
 
-## 🎨 Estilização
+## Estilização
 
 Os estilos da página de login estão separados do componente React no arquivo:
-
-```text
-Login.css
-```
-
-Localizado em:
 
 ```text
 auth-frontend/src/pages/Login/Login.css
@@ -144,7 +138,7 @@ Essa separação mantém a estrutura do projeto organizada e facilita futuras al
 
 ---
 
-## ▶️ Como executar o projeto
+## Como executar o projeto
 
 ### 1. Clone o repositório
 
@@ -174,7 +168,7 @@ Após iniciar o servidor de desenvolvimento, o Vite exibirá no terminal o ender
 
 ---
 
-## 📦 Build para produção
+## Build para produção
 
 Para gerar a versão de produção do frontend:
 
@@ -190,7 +184,7 @@ npm run preview
 
 ---
 
-## 🧠 Conceitos praticados
+## Conceitos praticados
 
 Durante o desenvolvimento deste projeto foram trabalhados conceitos importantes de desenvolvimento frontend, como:
 
@@ -211,7 +205,7 @@ Durante o desenvolvimento deste projeto foram trabalhados conceitos importantes 
 
 ---
 
-## 🔄 Frontend e Backend
+## Frontend e Backend
 
 O projeto possui uma estrutura dividida entre frontend e backend, permitindo trabalhar a comunicação entre uma aplicação React e uma aplicação desenvolvida em Java.
 
@@ -219,7 +213,7 @@ A integração com o backend será responsável pelo processamento das informaç
 
 ---
 
-## 🔒 Segurança
+## Segurança
 
 Por se tratar de um projeto de autenticação, algumas práticas importantes devem ser consideradas durante a evolução da aplicação:
 
@@ -232,30 +226,30 @@ Por se tratar de um projeto de autenticação, algumas práticas importantes dev
 
 ---
 
-## 📌 Status do projeto
+## Status do projeto
 
-🚧 **Em desenvolvimento**
+**Em desenvolvimento**
 
 O projeto está sendo desenvolvido com foco em aprendizado e evolução das habilidades em **React, TypeScript e Java**, podendo receber novas funcionalidades e melhorias ao longo do desenvolvimento.
 
 ---
 
-## 👨‍💻 Desenvolvedor
+## Desenvolvedor
 
 **Gustavo Leão**
 
 Estudante de Engenharia de Software com foco em desenvolvimento web e desenvolvimento de aplicações utilizando tecnologias como **JavaScript, TypeScript, React, HTML, CSS e Java**.
 
-### 🌐 Portfólio
+### Portfólio
 
 gustavol.vercel.app
 
-### 💻 GitHub
+### GitHub
 
 github.com/G-Leao
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto foi desenvolvido para fins de estudo e portfólio.
