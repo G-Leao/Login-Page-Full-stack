@@ -3,6 +3,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import NotFound from "../pages/NotFound/NotFound";
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

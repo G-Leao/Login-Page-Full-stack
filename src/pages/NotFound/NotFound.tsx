@@ -1,11 +1,12 @@
 import {Link} from "react-router-dom";
 import "./NotFound.css";
+import NOTFOUND_IMAGE from "../../images/404_illustration.png";
 
 function NotFound() {
   return (
     <div className="not-found-container">
       <div className="not-found-image">
-        <img src="/path/to/404-image.png" alt="Not Found" />
+        <img src={NOTFOUND_IMAGE} alt="Not Found" />
       </div>
       <div className="not-found-text">
         <h1>404 - Not Found</h1>
