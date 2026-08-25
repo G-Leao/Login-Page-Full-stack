@@ -34,6 +34,7 @@ function ForgotPassword() {
       type: "success",
       message: "Link de Recuperação enviado ao seu E-mail",
     });
+    setEmail("");
     setIsSubmitting(false);
   };
 

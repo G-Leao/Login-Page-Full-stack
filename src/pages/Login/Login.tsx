@@ -153,10 +153,15 @@ function Login() {
        */
       await new Promise((resolve) => setTimeout(resolve, 600));
 
+      setForm({
+        email: "",
+        password: "",
+      });
+
       /*
        * Vai para o Dashboard
        */
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       console.error(error);
 

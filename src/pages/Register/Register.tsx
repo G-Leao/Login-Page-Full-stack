@@ -107,6 +107,15 @@ function Register() {
         message: "Conta criada com sucesso! Redirecionando...",
       });
 
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        terms: false,
+      });
+      setErrors({});
+
       setTimeout(() => navigate("/login"), 1200);
     } catch {
       setStatus({ type: "error", message: "Não foi possível criar a conta." });

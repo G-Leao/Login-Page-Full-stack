@@ -1,17 +1,32 @@
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+type LoggedUser = {
+  name: string;
+  email: string;
+};
+
 function Dashboard() {
-  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState<LoggedUser | null>(null);
 
   useEffect(() => {
     const loggedUser = localStorage.getItem("loggedUser");
 
     if (loggedUser) {
-      setUser(JSON.parse(loggedUser));
+      try {
+        setUser(JSON.parse(loggedUser));
+      } catch {
+        localStorage.removeItem("loggedUser");
+      }
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedUser");
+    navigate("/login", { replace: true });
+  };
   return (
     <div className="dashboard">
       <h1>DASHBOARD</h1>
@@ -44,9 +59,9 @@ function Dashboard() {
       </div>
 
       <div className="button-dashboard">
-        <Link to="/login" className="quit-btn">
-          Voltar para Login
-        </Link>
+        <button type="button" className="quit-btn" onClick={handleLogout}>
+          Sair
+        </button>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import Register from "../pages/Register/Register";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import NotFound from "../pages/NotFound/NotFound";
+import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoutes() {
   return (
@@ -12,7 +13,9 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
