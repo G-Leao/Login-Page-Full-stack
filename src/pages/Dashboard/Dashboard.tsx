@@ -1,7 +1,17 @@
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const loggedUser = localStorage.getItem("loggedUser");
+
+    if (loggedUser) {
+      setUser(JSON.parse(loggedUser));
+    }
+  }, []);
   return (
     <div className="dashboard">
       <h1>DASHBOARD</h1>
@@ -13,8 +23,9 @@ function Dashboard() {
       <div className="Content-dashboard">
         <div className="Dashboard-card">
           <span className="card-icon">👤</span>
-          <h4>Usuário:</h4>
-          <small>E-mail:</small>
+          <p>{user?.name}</p>
+
+          <small>{user?.email}</small>
         </div>
 
         <div className="Dashboard-card">

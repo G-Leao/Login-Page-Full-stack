@@ -1,7 +1,9 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import "./Login.css";
+
 type LoginForm = {
   email: string;
   password: string;
@@ -9,22 +11,37 @@ type LoginForm = {
 
 type LoginErrors = Partial<Record<keyof LoginForm, string>>;
 
+type User = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 function Login() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState<LoginForm>(() => ({
-    email: typeof window !== 'undefined' ? (localStorage.getItem('rememberedEmail') ?? '') : '',
-    password: '',
+    email:
+      typeof window !== "undefined"
+        ? (localStorage.getItem("rememberedEmail") ?? "")
+        : "",
+    password: "",
   }));
 
   const [errors, setErrors] = useState<LoginErrors>({});
+
   const [showPassword, setShowPassword] = useState(false);
+
   const [rememberMe, setRememberMe] = useState<boolean>(() => {
     try {
-      return Boolean(localStorage.getItem('rememberedEmail'));
+      return Boolean(localStorage.getItem("rememberedEmail"));
     } catch {
       return false;
     }
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [status, setStatus] = useState<{
     type: "idle" | "success" | "error";
     message: string;
@@ -37,29 +54,40 @@ function Login() {
     const nextErrors: LoginErrors = {};
 
     if (!form.email.trim()) {
-      nextErrors.email = "Informe Seu E-mail";
+      nextErrors.email = "Informe seu e-mail.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      nextErrors.email = "Digite um E-mail válido.";
+      nextErrors.email = "Digite um e-mail válido.";
     }
 
     if (!form.password.trim()) {
-      nextErrors.password = "Informe sua Senha";
+      nextErrors.password = "Informe sua senha.";
     } else if (form.password.length < 6) {
-      nextErrors.password = "A senha deve ter No mínimo 6 Caracteres";
+      nextErrors.password = "A senha deve ter no mínimo 6 caracteres.";
     }
 
     setErrors(nextErrors);
+
     return Object.keys(nextErrors).length === 0;
   };
 
   const handleChange = (field: keyof LoginForm, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
     setErrors((prev) => {
-      const next = { ...prev } as LoginErrors;
+      const next = { ...prev };
+
       delete next[field];
+
       return next;
     });
-    setStatus({ type: "idle", message: "" });
+
+    setStatus({
+      type: "idle",
+      message: "",
+    });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -68,31 +96,73 @@ function Login() {
     if (!validateForm()) {
       setStatus({
         type: "error",
-        message: "Corrija Os campos antes de continuar",
+        message: "Corrija os campos antes de continuar.",
       });
+
       return;
     }
 
     setIsSubmitting(true);
-    setStatus({ type: "idle", message: "" });
+
+    setStatus({
+      type: "idle",
+      message: "",
+    });
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      const rawUsers = localStorage.getItem("users");
 
+      const users: User[] = rawUsers ? JSON.parse(rawUsers) : [];
+
+      const userFound = users.find(
+        (user) =>
+          user.email.toLowerCase() === form.email.trim().toLowerCase() &&
+          user.password === form.password,
+      );
+
+      if (!userFound) {
+        setStatus({
+          type: "error",
+          message: "E-mail ou senha incorretos.",
+        });
+
+        return;
+      }
+
+      /*
+       * Lembrar e-mail
+       */
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", form.email);
       } else {
         localStorage.removeItem("rememberedEmail");
       }
 
+      /*
+       * Salva o usuário que está logado
+       */
+      localStorage.setItem("loggedUser", JSON.stringify(userFound));
+
       setStatus({
         type: "success",
-        message: "Login Simulado Com Sucesso!",
+        message: "Login realizado com sucesso!",
       });
-    } catch {
+
+      /*
+       * Pequeno delay para mostrar a mensagem
+       */
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      /*
+       * Vai para o Dashboard
+       */
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+
       setStatus({
         type: "error",
-        message: "Não Foi Possivel Realizar o Login",
+        message: "Não foi possível realizar o login.",
       });
     } finally {
       setIsSubmitting(false);
@@ -103,13 +173,15 @@ function Login() {
     <div className="login-page">
       <div className="login-card">
         <div className="login-header">
-          <p className="eyebrow">Bem vindo de Volta!</p>
-          <h1>Entrar Na Sua Conta</h1>
+          <p className="eyebrow">Bem-vindo de volta!</p>
+
+          <h1>Entrar na sua conta</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form" noValidate>
           <div className="field-group">
             <label htmlFor="email">E-mail</label>
+
             <input
               id="email"
               name="email"
@@ -120,6 +192,7 @@ function Login() {
               placeholder="seuemail@empresa.com"
               className={errors.email ? "input-error" : ""}
             />
+
             {errors.email && (
               <small className="error-message">{errors.email}</small>
             )}
@@ -127,6 +200,7 @@ function Login() {
 
           <div className="field-group">
             <label htmlFor="password">Senha</label>
+
             <div className="password-wrapper">
               <input
                 id="password"
@@ -135,9 +209,10 @@ function Login() {
                 type={showPassword ? "text" : "password"}
                 value={form.password}
                 onChange={(e) => handleChange("password", e.target.value)}
-                placeholder="Digite Sua Senha"
+                placeholder="Digite sua senha"
                 className={errors.password ? "input-error" : ""}
               />
+
               <button
                 type="button"
                 className="toggle-password"
@@ -148,6 +223,7 @@ function Login() {
                 {showPassword ? "Ocultar" : "Mostrar"}
               </button>
             </div>
+
             {errors.password && (
               <small className="error-message">{errors.password}</small>
             )}
@@ -160,11 +236,12 @@ function Login() {
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
               />
+
               <span>Lembrar-me</span>
             </label>
 
             <Link to="/forgot-password" className="link-text">
-              Esqueci Minha senha
+              Esqueci minha senha
             </Link>
           </div>
 
@@ -181,7 +258,7 @@ function Login() {
           </button>
 
           <p className="register-link">
-            Ainda não tem uma conta?{""}
+            Ainda não tem uma conta?{" "}
             <Link to="/register" className="link-text">
               CRIAR CONTA
             </Link>
